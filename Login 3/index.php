@@ -1,38 +1,52 @@
 <?php
-// Replace with your actual database connection details
-$servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database_name";
+// Error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1); // Disable display_errors in production
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Define secure database credentials outside of document root
+define("DB_SERVER", "localhost");
+define("DB_USERNAME", "your_username");
+define("DB_PASSWORD", "your_password");
+define("DB_NAME", "your_database_name");
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Create a secure connection using PDO
+try {
+    $conn = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 
-// Retrieve user-entered credentials
-$username = $_POST['username'];
-$id_number = $_POST['id_number'];
-$passcode = $_POST['passcode'];
+// Retrieve user-entered credentials with validation
+$username = htmlspecialchars(trim($_POST['username']));
+$id_number = htmlspecialchars(trim($_POST['id_number']));
+$passcode = htmlspecialchars(trim($_POST['passcode']));
 
-// Prepare a secure SQL statement to prevent SQL injection
+// Input validation (add more as needed)
+if (empty($username) || empty($id_number) || empty($passcode)) {
+    die("Please enter all credentials.");
+}
+
+// Prepared statement with parameterized query
 $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND id_number = ? AND passcode = ?");
-$stmt->bind_param("ssi", $username, $id_number, $passcode);
+$stmt->bindParam(1, $username);
+$stmt->bindParam(2, $id_number);
+$stmt->bindParam(3, $passcode);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($result->num_rows > 0) {
+if ($result) {
     // Successful login
+    session_start();
     $_SESSION['loggedin'] = true;
-    header("Location: dashboard.php"); // Redirect to secure area
+    header("Location: dashboard.php");
+    exit();
 } else {
     // Invalid credentials
     echo "Invalid username, ID number, or passcode.";
 }
 
-$stmt->close();
-$conn->close();
+$stmt->closeCursor();
+$conn = null; // Close the connection
 ?>
+
