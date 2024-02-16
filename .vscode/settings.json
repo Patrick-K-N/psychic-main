@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "maxRows": 500,
+            "previewLimit": 50,
+            "driver": "DynamoDB Driver",
+            "name": "userdb",
+            "group": "mysqlgroup",
+            "region": "NaIrobi"
+        }
+    ]
+}
