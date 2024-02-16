@@ -1,4 +1,3 @@
-// Example: Focus on email field when the page loads
 window.onload = function() {
     document.getElementById("email").focus();
   };
