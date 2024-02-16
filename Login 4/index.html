@@ -4,63 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebX Financial System - Login</title>
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}"> </head>
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+</head>
 <body>
     <div class="container">
         <h1>WebX Financial System</h1>
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
 
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password">
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="remember">
-                        Remember Me
-                    </label>
-                </div>
-            </div>
+        <form method="POST" action="{{ route('login') }}"> @csrf
 
             <button type="submit" class="btn btn-primary">Login</button>
-
-            @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
-                    Forgot Your Password?
-                </a>
-            @endif
         </form>
+
+        <div class="form-group"> <a href="{{ route('register') }}" class="btn btn-secondary">Register</a>
+        </div>
     </div>
 
-    <script src="{{ asset('js/login.js') }}"></script> </body>
+    <script src="{{ asset('js/login.js') }}"></script>
+</body>
 </html>
