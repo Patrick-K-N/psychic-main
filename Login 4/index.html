@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebX Financial System - Login</title>
+    <title>WebX Financial System</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="container">
-        <h1>WebX Financial System</h1>
 
-        <form method="POST" action="{{ route('login') }}" class="form-container">
+    <img src="pinterestdownloader.com-1708081063.945668-ezgif.com-crop.gif" alt="Background photo" class="background-image">
+        <div class="container">
+        <h1>WebX Financial System</h1>
+        
+         <form method="POST" action="{{ route('login') }}" class="form-container">
 
 
             <div class="form-group">
@@ -38,6 +40,8 @@
         <div class="form-group">
             <a href="{{ route('register') }}" class="btn btn-secondary">Register</a>
         </div>
+
+
     </div>
 
     <script src="{{ asset('js/login.js') }}"></script>
