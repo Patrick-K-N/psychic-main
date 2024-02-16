@@ -58,9 +58,9 @@ label {
 
 .btn-secondary {
   background-color: #ccc;
-  color: #333;
+  color: #443e3e;
   border: none;
-  padding: 10px 10px;
+  padding: 5px 10px;
   border-radius: 3px;
   cursor: pointer;
 }
