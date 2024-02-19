@@ -8,25 +8,30 @@
   z-index: -1; /* Places the image behind other content */
 }
 
-
 .container {
   width: 400px;
   margin: 100px auto;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2); /* Increased shadow intensity */
+  background-color: rgba(255, 255, 255, 0.05); /* Slightly transparent white overlay */
   text-align: center;
+  color: #fff; /* Text color in white for better contrast */
 }
 
 h1 {
   margin-bottom: 20px;
+  color: #fff; /* Same white color for consistency */
 }
 
 .form-container {
-  background-color: rgba(255, 255, 255, 0.5); /* Sets transparency level (0 to 1) */
+  background-color: rgba(255, 255, 255, 0.05); /* Slightly transparent white overlay */
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px; /* Increased rounded corner radius */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
 }
+
+
 
 
 .form-group {
